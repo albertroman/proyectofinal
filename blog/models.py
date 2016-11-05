@@ -3,10 +3,11 @@ from django.contrib import admin
 # Create your models here.
 
 class Bus(models.Model):
-    modelo_bus= models.CharField(max_length=4)
-    placa_bus= models.CharField(max_length=15)
-    no_asiento_bus= models.CharField(max_length=4)
-
+    modelo_bus = models.CharField(max_length=4)
+    placa_bus = models.CharField(max_length=15)
+    no_asiento_bus = models.CharField(max_length=4)
+    imagen_bus = models.ImageField(upload_to='imagen/')
+    
     def __str__(self):
         return self.modelo_bus
 
