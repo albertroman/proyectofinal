@@ -7,9 +7,9 @@ class Bus(models.Model):
     placa_bus = models.CharField(max_length=15)
     no_asiento_bus = models.CharField(max_length=4)
     imagen_bus = models.ImageField(upload_to='imagen/')
-    
+
     def __str__(self):
-        return self.modelo_bus
+        return self.placa_bus
 
 class Asiento(models.Model):
     no_asiento=models.CharField(max_length=4)
