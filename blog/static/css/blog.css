@@ -100,13 +100,13 @@ background-position: -116px -10px;
 background-position: -170px -10px;
 }
 .banner{
-background:url(http://p.w3layouts.com/demos/career/web/images/bg.jpg) no-repeat 0px 0px;
-background-size:100%;
-min-height:410px;
+background:url(http://www.face-9.com/wp-content/uploads/2015/11/bus-banner.jpg) no-repeat 0px 0px;
+background-size:125%;
+min-height:300px;
 }
 .banner-info{
 float:right;
-margin-top: 13%;
+margin-top: 2%;
 text-align:right;
 }
 .banner-info h1{

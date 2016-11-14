@@ -11,3 +11,23 @@ class ingresarBus(forms.ModelForm):
     class Meta:
         model = Bus
         fields = ('modelo_bus', 'placa_bus','no_asiento_bus')
+
+class ingresarProgramacion(forms.ModelForm):
+    class Meta:
+        model = Programacion
+        fields = ('fecha', 'hora','id_bus')
+
+class ingresarDestino(forms.ModelForm):
+    class Meta:
+        model = Destino
+        fields = ('lugar_destino','valor_destino')
+
+class ingresarCliente(forms.ModelForm):
+    class Meta:
+        model = Cliente
+        fields = ('nombre_cliente','apellido_cliente','edad_cliente','genero_cliente','telefono_cliente')
+
+class ingresarReserva(forms.ModelForm):
+    class Meta:
+        model = Reserva
+        fields = ('fecha_reserva','cliente','programacion','destino')
