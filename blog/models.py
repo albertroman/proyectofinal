@@ -17,8 +17,8 @@ class Asiento(models.Model):
     id_bus=models.ForeignKey(Bus)
 
 class Programacion(models.Model):
-    fecha=models.DateTimeField('fecha salida')
-    hora=models.CharField(max_length=10)
+    fecha=models.DateField()
+    hora=models.TimeField()
     id_bus=models.ForeignKey(Bus)
 
     def __str__(self):
@@ -32,6 +32,7 @@ class Destino(models.Model):
         return self.lugar_destino
 
 class Cliente(models.Model):
+    NIT_cliente=models.CharField(max_length=10)
     nombre_cliente=models.CharField(max_length=50)
     apellido_cliente=models.CharField(max_length=50)
     edad_cliente=models.CharField(max_length=2)
@@ -44,7 +45,7 @@ class Cliente(models.Model):
         return self.nombre_cliente
 
 class Reserva(models.Model):
-    fecha_reserva=models.DateTimeField('fecha Reserva')
+    fecha_reserva=models.DateField('fecha Reserva')
     cliente=models.ForeignKey(Cliente,on_delete=models.CASCADE)
     programacion=models.ForeignKey(Programacion,on_delete=models.CASCADE)
     destino=models.ForeignKey(Destino,on_delete=models.CASCADE)

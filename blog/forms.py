@@ -25,7 +25,7 @@ class ingresarDestino(forms.ModelForm):
 class ingresarCliente(forms.ModelForm):
     class Meta:
         model = Cliente
-        fields = ('nombre_cliente','apellido_cliente','edad_cliente','genero_cliente','telefono_cliente')
+        fields = ('NIT_cliente','nombre_cliente','apellido_cliente','edad_cliente','genero_cliente','telefono_cliente')
 
 class ingresarReserva(forms.ModelForm):
     class Meta:
