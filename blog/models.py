@@ -50,6 +50,9 @@ class Reserva(models.Model):
     programacion=models.ForeignKey(Programacion,on_delete=models.CASCADE)
     destino=models.ForeignKey(Destino,on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.fecha_reserva
+
 class ReservaInLine(admin.TabularInline):
     model=Reserva
     extra=1

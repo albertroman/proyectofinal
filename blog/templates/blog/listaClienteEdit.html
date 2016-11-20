@@ -1,10 +1,11 @@
 {% extends 'blog/principal.html' %}
 
     {% block content %}
-    <h1>Lista Cliente</h1>
+    <h1>Editar Cliente</h1>
 
         {% for post in posts %}
         <p>-----------------------------------------------</p>
+            <a class="btn btn-default" href="{% url 'EditarCliente' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         <div>
           <h1>NIT : {{ post.NIT_cliente }}</h1>
           <h4>Nombre : {{ post.nombre_cliente }}</h4>

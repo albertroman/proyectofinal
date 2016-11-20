@@ -5,9 +5,27 @@ from .models import Bus,Programacion,Destino,Cliente,Reserva
 from django.shortcuts import render, get_object_or_404
 # Create your views here.
 
+# inicios
 
 def inicio(request):
-        return render(request, 'blog/principal.html', {})
+    return render(request, 'blog/inicio.html', {})
+
+def BusInicio(request):
+    return render(request,'blog/BusInicio.html',{})
+
+def ClienteInicio(request):
+    return render(request,'blog/ClienteInicio.html',{})
+
+def ProgramacionInicio(request):
+    return render(request,'blog/ProgramacionInicio.html',{})
+
+def DestinoInicio(request):
+    return render(request,'blog/DestinosInicio.html',{})
+
+def ReservaInicio(request):
+    return render(request,'blog/ReservaInicio.html',{})
+
+#Ingresar
 
 def IngresarBus(request):
     if request.method == "POST":
@@ -59,24 +77,10 @@ def IngresarCliente(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return render(request, 'blog/ingresarCliente.html', {'form': form})
+            return render(request, 'blog/listaCliente.html', {'form': form})
     else:
         form=ingresarCliente()
     return render(request, 'blog/ingresarCliente.html', {'form': form})
-
-def EditarCliente(request, pk):
-        post = get_object_or_404(Cliente, pk=pk)
-        if request.method == "POST":
-            form = ingresarCliente(request.POST, instance=post)
-            if form.is_valid():
-                post = form.save(commit=False)
-                post.author=request.user
-                post.save()
-                return redirect('blog/views/listaClienteEdit', pk=post.pk)
-        else:
-            form = ingresarCliente(instance=post)
-        return render(request, 'blog/editarCliente.html', {'form': form})
-
 
 def IngresarReserva(request):
     if request.method == "POST":
@@ -89,6 +93,7 @@ def IngresarReserva(request):
         form=ingresarReserva()
     return render(request, 'blog/ingresarReserva.html', {'form': form})
 
+#Listas
         #osts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
 def ListaBus(request):
     posts=Bus.objects.order_by('placa_bus')
@@ -106,10 +111,100 @@ def ListaCliente(request):
     posts=Cliente.objects.order_by('nombre_cliente')
     return render(request, 'blog/listaCliente.html', {'posts': posts})
 
+def ListaReserva(request):
+    posts=Reserva.objects.order_by('fecha_reserva')
+    return render(request, 'blog/listaReserva.html', {'posts': posts})
+
+# Lista Editar
+
+def ListaBusEditar(request):
+    posts=Bus.objects.order_by('placa_bus')
+    return render(request, 'blog/listaBusEdit.html', {'posts': posts})
+
 def ListaClienteEditar(request):
     posts=Cliente.objects.order_by('nombre_cliente')
     return render(request, 'blog/listaClienteEdit.html', {'posts': posts})
 
-def ListaReserva(request):
+def ListaProgramacionEditar(request):
+    posts=Programacion.objects.order_by('hora')
+    return render(request, 'blog/listaProgramacionEdit.html', {'posts': posts})
+
+def ListaDestinoEditar(request):
+    posts=Destino.objects.order_by('lugar_destino')
+    return render(request, 'blog/listaDestinoEdit.html', {'posts': posts})
+
+def ListaReservaEditar(request):
     posts=Reserva.objects.order_by('fecha_reserva')
-    return render(request, 'blog/listaReserva.html', {'posts': posts})
+    return render(request, 'blog/listaReservaEdit.html', {'posts': posts})
+
+# editar
+
+def EditarCliente(request, pk):
+    posts=Cliente.objects.order_by('nombre_cliente')
+    post = get_object_or_404(Cliente, pk=pk)
+    if request.method == "POST":
+        form = ingresarCliente(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author=request.user
+            post.save()
+            return redirect('blog.views.ListaClienteEditar')
+    else:
+        form = ingresarCliente(instance=post)
+    return render(request, 'blog/editarCliente.html', {'form': form})
+
+def EditarBus(request, pk):
+    posts=Bus.objects.order_by('placa_bus')
+    post = get_object_or_404(Bus, pk=pk)
+    if request.method == "POST":
+        form = ingresarBus(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author=request.user
+            post.save()
+            return redirect('blog.views.ListaBusEditar')
+    else:
+        form = ingresarBus(instance=post)
+    return render(request, 'blog/editarBus.html', {'form': form})
+
+def EditarProgramacion(request, pk):
+    posts=Programacion.objects.order_by('hora')
+    post = get_object_or_404(Bus, pk=pk)
+    if request.method == "POST":
+        form = ingresarProgramacion(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author=request.user
+            post.save()
+            return redirect('blog.views.ListaProgramacionEditar')
+    else:
+        form = ingresarProgramacion(instance=post)
+    return render(request, 'blog/editarProgramacion.html', {'form': form})
+
+def EditarDestino(request, pk):
+    posts=Destino.objects.order_by('lugar_destino')
+    post = get_object_or_404(Bus, pk=pk)
+    if request.method == "POST":
+        form = ingresarDestino(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author=request.user
+            post.save()
+            return redirect('blog.views.ListaDestinoEditar')
+    else:
+        form = ingresarDestino(instance=post)
+    return render(request, 'blog/editarDestino.html', {'form': form})
+
+def EditarReserva(request, pk):
+    posts=Reserva.objects.order_by('fecha_reserva')
+    post = get_object_or_404(Bus, pk=pk)
+    if request.method == "POST":
+        form = ingresarReserva(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author=request.user
+            post.save()
+            return redirect('blog.views.ListaReservaEditar')
+    else:
+        form = ingresarReserva(instance=post)
+    return render(request, 'blog/editarReserva.html', {'form': form})

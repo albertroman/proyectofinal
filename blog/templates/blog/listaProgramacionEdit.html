@@ -1,0 +1,17 @@
+{% extends 'blog/principal.html' %}
+
+    {% block content %}
+    <h1>Lista Programacion</h1>
+
+        {% for post in posts %}
+        <a class="btn btn-default" href="{% url 'EditarProgramacion' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <p>-----------------------------------------------</p>
+        <div>
+          <h1>Fecha: {{ post.fecha }}</h1>
+          <h4>Hora : {{ post.hora }}</h4>
+          <h4>Bus : {{ post.id_bus }}</h4>
+
+        </div>
+
+        {% endfor %}
+    {% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'blog/principal.html' %}
+
+    {% block content %}
+    <h1>Editar Bus</h1>
+
+        {% for post in posts %}
+        <a class="btn btn-default" href="{% url 'EditarBus' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <p>-----------------------------------------------</p>
+        <div>
+          <h1>Placa Bus: {{ post.placa_bus }}</h1>
+          <h4>Modelo : {{ post.modelo_bus }}</h4>
+          <h4>No. Asientos : {{ post.no_asiento_bus }}</h4>
+          <h4>Imagen : {{ post.imagen_bus}}</h4>
+        </div>
+
+        {% endfor %}
+    {% endblock content %}

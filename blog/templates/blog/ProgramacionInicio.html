@@ -1,0 +1,20 @@
+{% extends 'blog/principal.html' %}
+
+    {% block content %}
+    <h1>Programacion</h1>
+
+    <a class="btn btn-default" href="{% url 'blog.views.IngresarProgramacion' %}"> <img src="http://3.bp.blogspot.com/-WDRrkRw-6EA/TwLEWnsu7xI/AAAAAAAAD5Y/IujQJAdHctY/s1600/30Symbol-Add.png"
+      width="100" height="100" alt="" class="img-responsive"/>
+      Agregar Programacion
+    </a>
+
+    <a class="btn btn-default" href="{% url 'blog.views.ListaProgramacion' %}"> <img src="http://www.children.gov.on.ca/images/childrensaid/reportingabuse/DTR-1checklist-icon.png"
+      width="100" height="100" alt="" class="img-responsive"/>
+      Lista Programacion
+    </a>
+
+      <a class="btn btn-default" href="{% url 'blog.views.ListaProgramacionEditar' %}"> <img src="http://vignette1.wikia.nocookie.net/freddy-fazbears-pizza/images/a/a0/Icono_encuesta.png/revision/latest?cb=20150719193007&path-prefix=es"
+        width="100" height="100" alt="" class="img-responsive"/>
+        Editar Programacion
+      </a>
+    {% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'blog/principal.html' %}
+
+    {% block content %}
+    <h1>Lista Destino</h1>
+
+        {% for post in posts %}
+        <p>-----------------------------------------------</p>
+        <a class="btn btn-default" href="{% url 'EditarCliente' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+
+        <div>
+          <h1>Destino: {{ post.lugar_destino }}</h1>
+          <h4>Valor : {{ post.valor_destino }}</h4>
+
+        </div>
+
+        {% endfor %}
+    {% endblock content %}

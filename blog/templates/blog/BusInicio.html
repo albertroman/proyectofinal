@@ -1,0 +1,20 @@
+{% extends 'blog/principal.html' %}
+
+    {% block content %}
+    <h1>BUS</h1>
+
+    <a class="btn btn-default" href="{% url 'blog.views.IngresarBus' %}"> <img src="http://3.bp.blogspot.com/-WDRrkRw-6EA/TwLEWnsu7xI/AAAAAAAAD5Y/IujQJAdHctY/s1600/30Symbol-Add.png"
+      width="100" height="100" alt="" class="img-responsive"/>
+      Agregar Bus
+    </a>
+
+    <a class="btn btn-default" href="{% url 'blog.views.ListaBus' %}"> <img src="http://www.children.gov.on.ca/images/childrensaid/reportingabuse/DTR-1checklist-icon.png"
+      width="100" height="100" alt="" class="img-responsive"/>
+      Lista Buses
+    </a>
+
+      <a class="btn btn-default" href="{% url 'blog.views.ListaBusEditar' %}"> <img src="http://vignette1.wikia.nocookie.net/freddy-fazbears-pizza/images/a/a0/Icono_encuesta.png/revision/latest?cb=20150719193007&path-prefix=es"
+        width="100" height="100" alt="" class="img-responsive"/>
+        Editar Bus
+      </a>
+    {% endblock content %}
