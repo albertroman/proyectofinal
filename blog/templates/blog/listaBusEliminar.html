@@ -1,10 +1,11 @@
 {% extends 'blog/principal.html' %}
 
     {% block content %}
-    <h1>Lista Bus</h1>
+    <h1>Eliminar Bus</h1>
 
         {% for post in posts %}
         <p>-----------------------------------------------</p>
+        <a class="btn btn-default" href="{% url 'EliminarBus' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
         <div>
           <h1>Placa Bus: {{ post.placa_bus }}</h1>
           <h4>Modelo : {{ post.modelo_bus }}</h4>

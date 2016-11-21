@@ -6,7 +6,7 @@ class Bus(models.Model):
     modelo_bus = models.CharField(max_length=4)
     placa_bus = models.CharField(max_length=15)
     no_asiento_bus = models.CharField(max_length=4)
-    imagen_bus = models.ImageField(upload_to='imagen/')
+    imagen_bus = models.ImageField(upload_to='media/Fotos/')
 
     def __str__(self):
         return self.placa_bus

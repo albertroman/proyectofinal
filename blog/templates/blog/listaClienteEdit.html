@@ -5,7 +5,7 @@
 
         {% for post in posts %}
         <p>-----------------------------------------------</p>
-            <a class="btn btn-default" href="{% url 'EditarCliente' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a class="btn btn-default" href="{% url 'EditarCliente' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         <div>
           <h1>NIT : {{ post.NIT_cliente }}</h1>
           <h4>Nombre : {{ post.nombre_cliente }}</h4>

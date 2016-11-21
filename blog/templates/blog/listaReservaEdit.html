@@ -4,8 +4,8 @@
     <h1>Lista Reserva</h1>
 
         {% for post in posts %}
-        <a class="btn btn-default" href="{% url 'EditarReserva' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         <p>-----------------------------------------------</p>
+        <a class="btn btn-default" href="{% url 'EditarReserva' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         <div>
           <h1>Fecha : {{ post.fecha_reserva }}</h1>
           <h4>Cliente : {{ post.cliente }}</h4>

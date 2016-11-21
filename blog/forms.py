@@ -10,7 +10,7 @@ class ingresarAsiento(forms.ModelForm):
 class ingresarBus(forms.ModelForm):
     class Meta:
         model = Bus
-        fields = ('modelo_bus', 'placa_bus','no_asiento_bus')
+        fields = ('modelo_bus', 'placa_bus','no_asiento_bus','imagen_bus')
 
 class ingresarProgramacion(forms.ModelForm):
     class Meta:

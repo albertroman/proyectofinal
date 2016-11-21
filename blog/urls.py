@@ -1,7 +1,12 @@
 from django.conf.urls import include, url
 from . import views
+from django.conf import settings
+
 
 urlpatterns = [
+
+        url(r'^media/(?P<path>.*)$','django.views.static.serve',{'document_root':settings.MEDIA_ROOT}),
+
         url(r'^$', views.inicio),
         url(r'^Bus/$', views.BusInicio),
         url(r'^Cliente/$', views.ClienteInicio),
@@ -28,10 +33,14 @@ urlpatterns = [
         url(r'^ListaDestinoEditar/$',views.ListaDestinoEditar,name='lista'),
         url(r'^ListaReservaEditar/$',views.ListaReservaEditar,name='lista'),
 
+        url(r'^ListaBusEliminar/$',views.ListaBusEliminar,name='lista'),
+
         url(r'^EditarCliente/(?P<pk>[0-9]+)/editar/$', views.EditarCliente, name='EditarCliente'),
         url(r'^EditarBus/(?P<pk>[0-9]+)/editar/$', views.EditarBus, name='EditarBus'),
         url(r'^EditarProgramacion/(?P<pk>[0-9]+)/editar/$', views.EditarProgramacion, name='EditarProgramacion'),
         url(r'^EditarDestino/(?P<pk>[0-9]+)/editar/$', views.EditarDestino, name='EditarDestino'),
         url(r'^EditarReserva/(?P<pk>[0-9]+)/editar/$', views.EditarReserva, name='EditarReserva'),
+
+        url(r'^EliminarBus/(?P<pk>[0-9]+)/eliminar/$', views.EliminarBus, name='EliminarBus'),
 
     ]

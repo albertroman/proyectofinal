@@ -3,6 +3,7 @@ from .forms import ingresarBus,ingresarAsiento,ingresarProgramacion,ingresarDest
 from django.shortcuts import redirect
 from .models import Bus,Programacion,Destino,Cliente,Reserva
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse,HttpResponseRedirect
 # Create your views here.
 
 # inicios
@@ -29,11 +30,12 @@ def ReservaInicio(request):
 
 def IngresarBus(request):
     if request.method == "POST":
-        form = ingresarBus(request.POST)
+        form = ingresarBus(request.POST or None, request.FILES or None)
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return render(request, 'blog/ingresar.html', {'form': form})
+            return redirect('blog.views.ListaBus')
+            #return render(request, 'blog/listaBus.html', {'form': form})
     else:
         form=ingresarBus()
     return render(request, 'blog/ingresar.html', {'form': form})
@@ -137,6 +139,13 @@ def ListaReservaEditar(request):
     posts=Reserva.objects.order_by('fecha_reserva')
     return render(request, 'blog/listaReservaEdit.html', {'posts': posts})
 
+# Lista EliminarBus
+
+def ListaBusEliminar(request):
+    posts=Bus.objects.order_by('placa_bus')
+    return render(request, 'blog/listaBusEliminar.html', {'posts': posts})
+
+
 # editar
 
 def EditarCliente(request, pk):
@@ -208,3 +217,11 @@ def EditarReserva(request, pk):
     else:
         form = ingresarReserva(instance=post)
     return render(request, 'blog/editarReserva.html', {'form': form})
+
+# Eliminar
+
+def EliminarBus(request, pk):
+    post = get_object_or_404(Bus, pk=pk)
+    post.delete()
+    return redirect('blog.views.ListaBusEliminar')
+    #return render (request, 'blog/listaBusEliminar.html',{'form':post})
