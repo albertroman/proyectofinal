@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Asiento',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('no_asiento', models.CharField(max_length=4)),
                 ('estado_asiento', models.CharField(max_length=1)),
             ],
@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Bus',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('modelo_bus', models.CharField(max_length=4)),
                 ('placa_bus', models.CharField(max_length=15)),
                 ('no_asiento_bus', models.CharField(max_length=4)),
@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Cliente',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('NIT_cliente', models.CharField(max_length=10)),
                 ('nombre_cliente', models.CharField(max_length=50)),
                 ('apellido_cliente', models.CharField(max_length=50)),
@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Destino',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('lugar_destino', models.CharField(max_length=50)),
                 ('valor_destino', models.CharField(max_length=5)),
             ],
@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Programacion',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('fecha', models.DateField()),
                 ('hora', models.TimeField()),
                 ('id_bus', models.ForeignKey(to='blog.Bus')),
@@ -60,7 +60,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Reserva',
             fields=[
-                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
+                ('id', models.AutoField(primary_key=True, auto_created=True, verbose_name='ID', serialize=False)),
                 ('fecha_reserva', models.DateField(verbose_name='fecha Reserva')),
                 ('cliente', models.ForeignKey(to='blog.Cliente')),
                 ('destino', models.ForeignKey(to='blog.Destino')),
@@ -70,12 +70,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cliente',
             name='destinos',
-            field=models.ManyToManyField(through='blog.Reserva', to='blog.Destino'),
+            field=models.ManyToManyField(to='blog.Destino', through='blog.Reserva'),
         ),
         migrations.AddField(
             model_name='cliente',
             name='programaciones',
-            field=models.ManyToManyField(through='blog.Reserva', to='blog.Programacion'),
+            field=models.ManyToManyField(to='blog.Programacion', through='blog.Reserva'),
         ),
         migrations.AddField(
             model_name='asiento',

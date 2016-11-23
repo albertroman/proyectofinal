@@ -22,7 +22,7 @@ class Programacion(models.Model):
     id_bus=models.ForeignKey(Bus)
 
     def __str__(self):
-        return self.hora
+        return str(self.hora)
 
 class Destino(models.Model):
     lugar_destino=models.CharField(max_length=50)

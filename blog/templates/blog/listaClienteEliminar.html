@@ -1,0 +1,19 @@
+{% extends 'blog/principal.html' %}
+
+    {% block content %}
+    <h1>Eliminar Cliente</h1>
+
+        {% for post in posts %}
+        <p>-----------------------------------------------</p>
+        <a class="btn btn-default" href="{% url 'EliminarCliente' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        <div>
+          <h1>NIT : {{ post.NIT_cliente }}</h1>
+          <h4>Nombre : {{ post.nombre_cliente }}</h4>
+          <h4>Apellido : {{post.apellido_cliente}}</h4>
+          <h4>Edad : {{post.edad_cliente}}</h4>
+          <h4>Genero : {{post.genero_cliente}}</h4>
+          <h4>Telefono : {{post.telefono_cliente}}</h4>
+        </div>
+
+        {% endfor %}
+    {% endblock content %}

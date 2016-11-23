@@ -1,0 +1,16 @@
+{% extends 'blog/principal.html' %}
+
+    {% block content %}
+    <h1>Eliminar Destino</h1>
+
+        {% for post in posts %}
+        <p>-----------------------------------------------</p>
+        <a class="btn btn-default" href="{% url 'EliminarDestino' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        <div>
+          <h1>Destino: {{ post.lugar_destino }}</h1>
+          <h4>Valor : {{ post.valor_destino }}</h4>
+
+        </div>
+
+        {% endfor %}
+    {% endblock content %}

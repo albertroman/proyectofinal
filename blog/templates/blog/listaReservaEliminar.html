@@ -1,0 +1,17 @@
+{% extends 'blog/principal.html' %}
+
+    {% block content %}
+    <h1>Eliminar Reserva</h1>
+
+        {% for post in posts %}
+        <p>-----------------------------------------------</p>
+        <a class="btn btn-default" href="{% url 'EliminarReserva' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        <div>
+          <h1>Fecha : {{ post.fecha_reserva }}</h1>
+          <h4>Cliente : {{ post.cliente }}</h4>
+          <h4>Programacion : {{post.programacion}}</h4>
+          <h4>Destino : {{post.destino}}</h4>
+        </div>
+
+        {% endfor %}
+    {% endblock content %}

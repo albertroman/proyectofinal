@@ -1,10 +1,41 @@
 from django.shortcuts import render
-from .forms import ingresarBus,ingresarAsiento,ingresarProgramacion,ingresarDestino,ingresarCliente,ingresarReserva
+from .forms import ingresarBus,ingresarAsiento,ingresarProgramacion,ingresarDestino,ingresarCliente,ingresarReserva,RegistroForm
 from django.shortcuts import redirect
 from .models import Bus,Programacion,Destino,Cliente,Reserva
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse,HttpResponseRedirect
-# Create your views here.
+from django.contrib import auth
+### Create your views here.
+from django.views.generic import CreateView
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse_lazy
+###
+
+
+class RegistroUsuario(CreateView):
+    model = User
+    template_name = "blog/registrar.html"
+    form_class = RegistroForm
+    success_url = reverse_lazy('inicio')
+
+
+def login(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    user = auth.authenticate(username=username, password=password)
+    if user is not None and user.is_active:
+        # Correct password, and the user is marked "active"
+        auth.login(request, user)
+        # Redirect to a success page.
+        return HttpResponseRedirect("/inicio/")
+    else:
+        # Show an error page
+        return redirect('blog.views.login')
+
+def logout(request):
+    auth.logout(request)
+    # Redirect to a success page.
+    return HttpResponseRedirect("/")
 
 # inicios
 
@@ -34,7 +65,7 @@ def IngresarBus(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('blog.views.ListaBus')
+            return redirect('blog.views.BusInicio')
             #return render(request, 'blog/listaBus.html', {'form': form})
     else:
         form=ingresarBus()
@@ -57,7 +88,7 @@ def IngresarProgramacion(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return render(request, 'blog/ingresarProgramacion.html', {'form': form})
+            return redirect('blog.views.ProgramacionInicio')
     else:
         form=ingresarProgramacion()
     return render(request, 'blog/ingresarProgramacion.html', {'form': form})
@@ -68,7 +99,7 @@ def IngresarDestino(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return render(request, 'blog/ingresarDestino.html', {'form': form})
+            return redirect('blog.views.DestinoInicio')
     else:
         form=ingresarDestino()
     return render(request, 'blog/ingresarDestino.html', {'form': form})
@@ -79,7 +110,7 @@ def IngresarCliente(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return render(request, 'blog/listaCliente.html', {'form': form})
+            return redirect('blog.views.ClienteInicio')
     else:
         form=ingresarCliente()
     return render(request, 'blog/ingresarCliente.html', {'form': form})
@@ -90,7 +121,7 @@ def IngresarReserva(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return render(request, 'blog/ingresarReserva.html', {'form': form})
+            return redirect('blog.views.ReservaInicio')
     else:
         form=ingresarReserva()
     return render(request, 'blog/ingresarReserva.html', {'form': form})
@@ -145,6 +176,21 @@ def ListaBusEliminar(request):
     posts=Bus.objects.order_by('placa_bus')
     return render(request, 'blog/listaBusEliminar.html', {'posts': posts})
 
+def ListaClienteEliminar(request):
+    posts=Cliente.objects.order_by('nombre_cliente')
+    return render(request, 'blog/listaClienteEliminar.html', {'posts': posts})
+
+def ListaDestinoEliminar(request):
+    posts=Destino.objects.order_by('lugar_destino')
+    return render(request, 'blog/listaDestinoEliminar.html', {'posts': posts})
+
+def ListaProgramacionEliminar(request):
+    posts=Programacion.objects.order_by('hora')
+    return render(request, 'blog/listaProgramacionEliminar.html', {'posts': posts})
+
+def ListaReservaEliminar(request):
+    posts=Reserva.objects.order_by('fecha_reserva')
+    return render(request, 'blog/listaReservaEliminar.html', {'posts': posts})
 
 # editar
 
@@ -225,3 +271,23 @@ def EliminarBus(request, pk):
     post.delete()
     return redirect('blog.views.ListaBusEliminar')
     #return render (request, 'blog/listaBusEliminar.html',{'form':post})
+
+def EliminarCliente(request, pk):
+    post = get_object_or_404(Cliente, pk=pk)
+    post.delete()
+    return redirect('blog.views.ListaClienteEliminar')
+
+def EliminarDestino(request, pk):
+    post = get_object_or_404(Destino, pk=pk)
+    post.delete()
+    return redirect('blog.views.ListaDestinoEliminar')
+
+def EliminarProgramacion(request, pk):
+    post = get_object_or_404(Programacion, pk=pk)
+    post.delete()
+    return redirect('blog.views.ListaProgramacionEliminar')
+
+def EliminarReserva(request, pk):
+    post = get_object_or_404(Reserva, pk=pk)
+    post.delete()
+    return redirect('blog.views.ListaReservaEliminar')

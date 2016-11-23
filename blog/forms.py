@@ -1,5 +1,7 @@
 from django import forms
 from .models import Bus,Asiento,Programacion,Destino,Cliente,Reserva
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
 
 
 class ingresarAsiento(forms.ModelForm):
@@ -31,3 +33,19 @@ class ingresarReserva(forms.ModelForm):
     class Meta:
         model = Reserva
         fields = ('fecha_reserva','cliente','programacion','destino')
+
+class RegistroForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = [
+                'username',
+                'first_name',
+                'last_name',
+                'email',
+            ]
+        labels = {
+                'username': 'Nombre de usuario',
+                'first_name': 'Nombre',
+                'last_name': 'Apellidos',
+                'email': 'Correo',
+        }
