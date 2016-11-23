@@ -224,7 +224,7 @@ def EditarBus(request, pk):
 
 def EditarProgramacion(request, pk):
     posts=Programacion.objects.order_by('hora')
-    post = get_object_or_404(Bus, pk=pk)
+    post = get_object_or_404(Programacion, pk=pk)
     if request.method == "POST":
         form = ingresarProgramacion(request.POST, instance=post)
         if form.is_valid():
@@ -238,7 +238,7 @@ def EditarProgramacion(request, pk):
 
 def EditarDestino(request, pk):
     posts=Destino.objects.order_by('lugar_destino')
-    post = get_object_or_404(Bus, pk=pk)
+    post = get_object_or_404(Destino, pk=pk)
     if request.method == "POST":
         form = ingresarDestino(request.POST, instance=post)
         if form.is_valid():
@@ -252,7 +252,7 @@ def EditarDestino(request, pk):
 
 def EditarReserva(request, pk):
     posts=Reserva.objects.order_by('fecha_reserva')
-    post = get_object_or_404(Bus, pk=pk)
+    post = get_object_or_404(Reserva, pk=pk)
     if request.method == "POST":
         form = ingresarReserva(request.POST, instance=post)
         if form.is_valid():
